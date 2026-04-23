@@ -2,34 +2,6 @@
 
 A comprehensive DBMS project that tracks and analyzes government election promises against their actual implementation status, with measurable outcomes using policy indicators.
 
-## 📁 Project Structure
-
-```
-├── sql/
-│   ├── 01_schema.sql              # Database & table creation (9 tables)
-│   ├── 02_sample_data.sql         # Sample data insertion
-│   ├── 03_queries_aggregate.sql   # COUNT, AVG, SUM, MIN, MAX with GROUP BY / HAVING
-│   ├── 04_queries_subqueries.sql  # Scalar, correlated, EXISTS, NOT IN subqueries
-│   ├── 05_queries_joins.sql       # INNER, LEFT, RIGHT, CROSS, SELF, NATURAL joins
-│   ├── 06_set_operations.sql      # UNION, INTERSECT, EXCEPT
-│   ├── 07_views.sql               # 4 views (dashboard, scorecard, analysis, effectiveness)
-│   ├── 08_functions.sql           # 3 stored functions
-│   ├── 09_procedures.sql          # 2 stored procedures with exception handling
-│   ├── 10_triggers.sql            # 4 triggers (validation, audit, auto-update)
-│   ├── 11_cursors.sql             # 2 cursor-based procedures
-│   ├── 12_advanced_queries.sql    # Window functions, analytics
-│   ├── 13_concurrency.sql         # Transactions, isolation levels, deadlock
-│   ├── 14_indexing.sql            # Composite, full-text indexes, EXPLAIN
-│   └── 15_normalization.sql       # 1NF → 2NF → 3NF analysis & demonstration
-│
-├── frontend/
-│   ├── index.html                 # Dashboard page
-│   ├── style.css                  # Design system (dark theme, glassmorphism)
-│   └── script.js                  # Data & rendering logic
-│
-└── README.md
-```
-
 ## 🗄️ Database Schema
 
 | Table | Description |
@@ -76,8 +48,4 @@ Open `frontend/index.html` directly in any browser — no server needed. The das
 - **Indexing** — Composite, full-text, EXPLAIN analysis
 - **Frontend** — Premium dark-theme dashboard with charts and filters
 
-## 📊 Tech Stack
 
-- **Database:** MySQL 8.0+
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript
-- **Design:** Dark theme, glassmorphism, Inter font, animated gradients
