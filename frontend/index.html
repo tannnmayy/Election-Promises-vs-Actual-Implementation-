@@ -3,203 +3,353 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Track and analyze government election promises against their actual implementation status with measurable outcomes. A DBMS project dashboard.">
-  <title>Election Promises Tracker — Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="description" content="Interactive DBMS Educational Dashboard — Election Promises vs Actual Implementation. Learn SQL concepts through real queries.">
+  <title>Election Promises Tracker — DBMS Educational Dashboard</title>
+  <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
-  <!-- ═══════════════ Navigation ═══════════════ -->
-  <nav class="navbar" id="navbar">
-    <div class="container">
-      <a href="#" class="navbar__brand">
-        <div class="navbar__logo">EP</div>
-        <div>
-          <div class="navbar__title">Election Promises Tracker</div>
-          <div class="navbar__subtitle">DBMS Project Dashboard</div>
-        </div>
-      </a>
-      <ul class="navbar__links">
-        <li><a href="#overview" class="navbar__link active">Overview</a></li>
-        <li><a href="#promises" class="navbar__link">Promises</a></li>
-        <li><a href="#governments" class="navbar__link">Governments</a></li>
-        <li><a href="#analytics" class="navbar__link">Analytics</a></li>
-        <li><a href="#outcomes" class="navbar__link">Outcomes</a></li>
-        <li><a href="#schema" class="navbar__link">Schema</a></li>
-      </ul>
+<div class="app-layout">
+  <!-- ═══════════ Sidebar ═══════════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <h1>🏛️ Election Promises Tracker</h1>
+      <div class="subtitle">DBMS Educational Dashboard</div>
     </div>
-  </nav>
-
-  <!-- ═══════════════ Hero Section ═══════════════ -->
-  <header class="hero" id="overview">
-    <div class="container">
-      <div class="hero__badge">
-        <span class="hero__badge-dot"></span>
-        DBMS Course Project
-      </div>
-      <h1 class="hero__title">Election Promises<br>vs Actual Implementation</h1>
-      <p class="hero__description">
-        A comprehensive database system to track, analyze, and visualize government election promises 
-        against their real-world implementation — powered by measurable policy indicators.
-      </p>
+    <div class="sidebar-status">
+      <span class="status-dot" id="statusDot"></span>
+      <span id="statusLabel">Checking connection...</span>
     </div>
-  </header>
+    <nav class="sidebar-nav">
+      <a class="nav-item active" data-chapter="aggregate" href="#"><span class="nav-icon">📊</span><span class="nav-label">Aggregate Functions</span></a>
+      <a class="nav-item" data-chapter="subqueries" href="#"><span class="nav-icon">🔍</span><span class="nav-label">Subqueries</span></a>
+      <a class="nav-item" data-chapter="joins" href="#"><span class="nav-icon">🔗</span><span class="nav-label">Joins</span></a>
+      <a class="nav-item" data-chapter="sets" href="#"><span class="nav-icon">📐</span><span class="nav-label">Set Operations</span></a>
+      <a class="nav-item" data-chapter="views" href="#"><span class="nav-icon">👁️</span><span class="nav-label">Views</span></a>
+      <a class="nav-item" data-chapter="functions" href="#"><span class="nav-icon">⚙️</span><span class="nav-label">Stored Functions</span></a>
+      <a class="nav-item" data-chapter="procedures" href="#"><span class="nav-icon">📋</span><span class="nav-label">Stored Procedures</span></a>
+      <a class="nav-item" data-chapter="triggers" href="#"><span class="nav-icon">⚡</span><span class="nav-label">Triggers</span></a>
+      <a class="nav-item" data-chapter="cursors" href="#"><span class="nav-icon">🔄</span><span class="nav-label">Cursors</span></a>
+      <a class="nav-item" data-chapter="normalization" href="#"><span class="nav-icon">🗂️</span><span class="nav-label">Normalization</span></a>
+      <a class="nav-item" data-chapter="concurrency" href="#"><span class="nav-icon">🔒</span><span class="nav-label">Concurrency Control</span></a>
+    </nav>
+  </aside>
 
-  <main>
-    <!-- ═══════════════ KPI Cards ═══════════════ -->
-    <section class="section" id="kpiSection">
-      <div class="container">
-        <div class="section__header">
-          <h2 class="section__title">
-            <span class="section__title-icon" style="background: rgba(99,102,241,0.12);">📊</span>
-            Key Metrics
-          </h2>
-        </div>
-        <div class="kpi-grid" id="kpiGrid">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </section>
+  <!-- ═══════════ Main Content ═══════════ -->
+  <main class="main-content">
+    <header class="content-header">
+      <button class="mobile-toggle" id="mobileToggle">☰</button>
+      <h2 id="headerTitle">Aggregate Functions</h2>
+      <span class="concept-tag" id="headerTag">COUNT, SUM, AVG, MIN, MAX</span>
+    </header>
 
-    <!-- ═══════════════ Promise Table ═══════════════ -->
-    <section class="section" id="promises">
-      <div class="container">
-        <div class="section__header">
-          <h2 class="section__title">
-            <span class="section__title-icon" style="background: rgba(16,185,129,0.12);">📋</span>
-            All Promises
-          </h2>
+    <div class="content-body">
+
+      <!-- ═══════════ Chapter 1: Aggregate ═══════════ -->
+      <section class="chapter active" id="chapter-aggregate">
+        <p class="chapter-description">Aggregate functions perform calculations across multiple rows to return a single summary value. Combined with GROUP BY, they enable powerful data analysis and reporting.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">📊</span> Select Query</div>
+          <div class="query-selector">
+            <select class="query-dropdown" id="aggSelect"></select>
+            <button class="btn btn-primary" id="aggExecute">▶ Execute Query</button>
+          </div>
         </div>
-        <div class="table-wrapper">
-          <div class="table-toolbar">
-            <div class="table-toolbar__search">
-              <span>🔍</span>
-              <input type="text" id="tableSearch" placeholder="Search promises..." aria-label="Search promises">
+        <div id="aggSQL"></div>
+        <div id="aggMeta"></div>
+        <div id="aggResults"><div class="empty-state"><div class="icon">👆</div>Select a query and click Execute</div></div>
+        <div class="card" style="display:none"><div class="chart-container"><canvas id="aggChart"></canvas></div></div>
+        <div id="aggExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 2: Subqueries ═══════════ -->
+      <section class="chapter" id="chapter-subqueries">
+        <p class="chapter-description">Subqueries (nested queries) are SELECT statements embedded inside another SQL statement. They can appear in WHERE, HAVING, FROM, or SELECT clauses, enabling complex filtering and comparison logic.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">🔍</span> Select Query</div>
+          <div class="query-selector">
+            <select class="query-dropdown" id="subSelect"></select>
+            <button class="btn btn-primary" id="subExecute">▶ Execute Query</button>
+          </div>
+        </div>
+        <div id="subSQL"></div>
+        <div id="subMeta"></div>
+        <div id="subResults"><div class="empty-state"><div class="icon">👆</div>Select a query and click Execute</div></div>
+        <div id="subExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 3: Joins ═══════════ -->
+      <section class="chapter" id="chapter-joins">
+        <p class="chapter-description">JOIN operations combine rows from two or more tables based on related columns. Different join types (INNER, LEFT, RIGHT, CROSS, SELF) control which rows appear in the result when matches are missing.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">🔗</span> Select Query</div>
+          <div class="query-selector">
+            <select class="query-dropdown" id="joinSelect"></select>
+            <button class="btn btn-primary" id="joinExecute">▶ Execute Query</button>
+          </div>
+        </div>
+        <div id="joinSQL"></div>
+        <div id="joinMeta"></div>
+        <div id="joinResults"><div class="empty-state"><div class="icon">👆</div>Select a query and click Execute</div></div>
+        <div id="joinExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 4: Set Operations ═══════════ -->
+      <section class="chapter" id="chapter-sets">
+        <p class="chapter-description">Set operations combine the results of two or more SELECT statements. UNION merges and deduplicates, UNION ALL keeps duplicates, INTERSECT finds common rows, and EXCEPT finds rows in one set but not another.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">📐</span> Select Query</div>
+          <div class="query-selector">
+            <select class="query-dropdown" id="setSelect"></select>
+            <button class="btn btn-primary" id="setExecute">▶ Execute Query</button>
+          </div>
+        </div>
+        <div id="setSQL"></div>
+        <div id="setMeta"></div>
+        <div id="setResults"><div class="empty-state"><div class="icon">👆</div>Select a query and click Execute</div></div>
+        <div id="setExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 5: Views ═══════════ -->
+      <section class="chapter" id="chapter-views">
+        <p class="chapter-description">Views are virtual tables defined by SQL queries. They simplify complex queries, provide data abstraction, and can enforce security by exposing only certain columns. Views don't store data — they compute results on each query.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">👁️</span> Select View</div>
+          <div class="query-selector">
+            <select class="query-dropdown" id="viewSelect"></select>
+            <button class="btn btn-primary" id="viewExecute">▶ Query View</button>
+            <button class="btn btn-outline" id="viewShowDef">📝 Show Definition</button>
+          </div>
+        </div>
+        <div id="viewSQL"></div>
+        <div id="viewMeta"></div>
+        <div id="viewResults"><div class="empty-state"><div class="icon">👆</div>Select a view and click Query</div></div>
+        <div id="viewExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 6: Stored Functions ═══════════ -->
+      <section class="chapter" id="chapter-functions">
+        <p class="chapter-description">Stored functions are reusable SQL routines that accept parameters, perform logic, and RETURN a single value. They can be used inside SELECT statements just like built-in functions.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">⚙️</span> Test Functions</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Government ID</label>
+              <input type="number" class="form-input" id="fnGovtId" value="1" min="1" max="3">
             </div>
-            <div class="table-toolbar__filters">
-              <button class="filter-btn active" data-filter="All" id="filterAll">All</button>
-              <button class="filter-btn" data-filter="Completed" id="filterCompleted">Completed</button>
-              <button class="filter-btn" data-filter="In Progress" id="filterInProgress">In Progress</button>
-              <button class="filter-btn" data-filter="Not Started" id="filterNotStarted">Not Started</button>
-              <button class="filter-btn" data-filter="Delayed" id="filterDelayed">Delayed</button>
+            <div class="form-group">
+              <label>Progress %</label>
+              <input type="number" class="form-input" id="fnProgress" value="65" min="0" max="100">
+            </div>
+            <div class="form-group">
+              <label>Promise ID</label>
+              <input type="number" class="form-input" id="fnPromiseId" value="1" min="1" max="5">
             </div>
           </div>
-          <div style="overflow-x: auto;">
-            <table class="data-table" id="promiseTable">
-              <thead>
-                <tr>
-                  <th>Promise <span class="sort-icon">↕</span></th>
-                  <th>Government <span class="sort-icon">↕</span></th>
-                  <th>Policy Area <span class="sort-icon">↕</span></th>
-                  <th>Status <span class="sort-icon">↕</span></th>
-                  <th>Progress <span class="sort-icon">↕</span></th>
-                  <th>Budget <span class="sort-icon">↕</span></th>
-                  <th>Priority <span class="sort-icon">↕</span></th>
-                </tr>
-              </thead>
-              <tbody id="promiseTableBody">
-                <!-- Rendered by JS -->
-              </tbody>
-            </table>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn btn-primary" id="fnFulfillment">Calculate Fulfillment Rate</button>
+            <button class="btn btn-primary" id="fnStatus">Get Status Category</button>
+            <button class="btn btn-primary" id="fnEfficiency">Budget Efficiency</button>
+            <button class="btn btn-outline" id="fnAllFunctions">Show All with Functions</button>
           </div>
         </div>
-      </div>
-    </section>
+        <div id="fnSQL"></div>
+        <div id="fnResults"><div class="empty-state"><div class="icon">👆</div>Enter parameters and click a function button</div></div>
+        <div id="fnExplanation"></div>
+      </section>
 
-    <!-- ═══════════════ Government Scorecards ═══════════════ -->
-    <section class="section" id="governments">
-      <div class="container">
-        <div class="section__header">
-          <h2 class="section__title">
-            <span class="section__title-icon" style="background: rgba(139,92,246,0.12);">🏛️</span>
-            Government Performance
-          </h2>
-        </div>
-        <div class="scorecard-grid" id="scorecardGrid">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════ Analytics Charts ═══════════════ -->
-    <section class="section" id="analytics">
-      <div class="container">
-        <div class="section__header">
-          <h2 class="section__title">
-            <span class="section__title-icon" style="background: rgba(245,158,11,0.12);">📈</span>
-            Analytics
-          </h2>
-        </div>
-        <div class="charts-grid">
-          <!-- Budget Allocation Chart -->
-          <div class="chart-card">
-            <div class="chart-card__title">💰 Budget Allocation by Promise</div>
-            <div class="bar-chart" id="budgetChart">
-              <!-- Rendered by JS -->
+      <!-- ═══════════ Chapter 7: Stored Procedures ═══════════ -->
+      <section class="chapter" id="chapter-procedures">
+        <p class="chapter-description">Stored procedures are named SQL programs stored in the database. Unlike functions, they can modify data, return multiple result sets, and use IN/OUT/INOUT parameters. They're invoked with CALL.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">📋</span> Update Promise Status</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Promise ID</label>
+              <input type="number" class="form-input" id="procPromiseId" value="1" min="1" max="5">
+            </div>
+            <div class="form-group">
+              <label>New Status</label>
+              <select class="form-input" id="procStatus">
+                <option>In Progress</option><option>Completed</option><option>Delayed</option><option>Abandoned</option><option>Not Started</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Progress %</label>
+              <input type="number" class="form-input" id="procProgress" value="70" min="0" max="100">
             </div>
           </div>
-          <!-- Status Distribution Donut -->
-          <div class="chart-card">
-            <div class="chart-card__title">📊 Status Distribution</div>
-            <div class="donut-chart-container" id="statusDonut">
-              <!-- Rendered by JS -->
+          <div class="form-group">
+            <label>Remarks</label>
+            <input type="text" class="form-input" id="procRemarks" value="Updated via dashboard" placeholder="Enter remarks...">
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <button class="btn btn-primary" id="procUpdate">📋 Call Update_Promise_Status</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="icon">📊</span> Generate Government Report</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Government ID</label>
+              <input type="number" class="form-input" id="procGovtId" value="1" min="1" max="3">
+            </div>
+            <div class="form-group" style="display:flex;align-items:flex-end">
+              <button class="btn btn-success" id="procReport">📊 Generate Report</button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+        <div id="procSQL"></div>
+        <div id="procResults"><div class="empty-state"><div class="icon">👆</div>Fill in parameters and execute a procedure</div></div>
+        <div id="procExplanation"></div>
+      </section>
 
-    <!-- ═══════════════ Promise vs Outcome ═══════════════ -->
-    <section class="section" id="outcomes">
-      <div class="container">
-        <div class="section__header">
-          <h2 class="section__title">
-            <span class="section__title-icon" style="background: rgba(6,182,212,0.12);">🎯</span>
-            Promise vs Outcome Analysis
-          </h2>
-        </div>
-        <div class="outcome-grid" id="outcomeGrid">
-          <!-- Rendered by JS -->
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══════════════ ER Diagram ═══════════════ -->
-    <section class="section" id="schema">
-      <div class="container">
-        <div class="section__header">
-          <h2 class="section__title">
-            <span class="section__title-icon" style="background: rgba(244,63,94,0.12);">🗄️</span>
-            Database Schema (ER Diagram)
-          </h2>
-        </div>
-        <div class="er-card">
-          <div style="text-align: center; margin-bottom: var(--space-lg);">
-            <span style="font-size: 0.82rem; color: var(--text-muted);">
-              🔑 <span style="color: var(--accent-amber);">Primary Key</span> &nbsp;·&nbsp; 
-              🔗 <span style="color: var(--accent-cyan);">Foreign Key</span> &nbsp;·&nbsp; 
-              • <span style="color: var(--text-secondary);">Attribute</span>
-            </span>
+      <!-- ═══════════ Chapter 8: Triggers ═══════════ -->
+      <section class="chapter" id="chapter-triggers">
+        <p class="chapter-description">Triggers are SQL code that automatically executes in response to INSERT, UPDATE, or DELETE events on a table. They run BEFORE or AFTER the event and are used for validation, auditing, and enforcing business rules.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">⚡</span> Trigger Actions</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Promise ID</label>
+              <input type="number" class="form-input" id="trgPromiseId" value="1" min="1" max="5">
+            </div>
+            <div class="form-group">
+              <label>New Progress %</label>
+              <input type="number" class="form-input" id="trgProgress" value="72" min="0" max="100">
+            </div>
           </div>
-          <div class="er-diagram" id="erDiagram">
-            <!-- Rendered by JS -->
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn btn-outline" id="trgList">📋 List All Triggers</button>
+            <button class="btn btn-primary" id="trgTest">⚡ Fire Update Trigger</button>
+            <button class="btn btn-outline" id="trgAudit">📝 View Audit Log</button>
           </div>
         </div>
-      </div>
-    </section>
+        <div id="trgSQL"></div>
+        <div id="trgResults"><div class="empty-state"><div class="icon">👆</div>Click a button to interact with triggers</div></div>
+        <div id="trgExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 9: Cursors ═══════════ -->
+      <section class="chapter" id="chapter-cursors">
+        <p class="chapter-description">Cursors allow row-by-row processing of query results inside stored procedures. They're used when set-based operations aren't sufficient and you need iterative logic for each row.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">🔄</span> Cursor Procedures</div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
+            <button class="btn btn-primary" id="curOverdue">🔄 Mark Overdue Promises (Cursor)</button>
+            <button class="btn btn-primary" id="curReports">📊 Generate All Govt Reports (Cursor)</button>
+          </div>
+        </div>
+        <div id="curSQL"></div>
+        <div id="curResults"><div class="empty-state"><div class="icon">👆</div>Click a button to execute a cursor procedure</div></div>
+        <div id="curExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 10: Normalization ═══════════ -->
+      <section class="chapter" id="chapter-normalization">
+        <p class="chapter-description">Database normalization organizes tables to minimize redundancy and prevent anomalies. The process involves decomposing tables through normal forms (1NF → 2NF → 3NF), each eliminating specific types of dependencies.</p>
+
+        <div id="normSteps"><!-- Rendered by normalization.js --></div>
+
+        <div class="card">
+          <div class="card-title"><span class="icon">🧪</span> Interactive Analysis</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Analyze Table</label>
+              <select class="form-input" id="normTableSelect">
+                <option value="PROMISE">PROMISE</option>
+                <option value="GOVERNMENT">GOVERNMENT</option>
+                <option value="POLICY_AREA">POLICY_AREA</option>
+                <option value="IMPLEMENTATION_STATUS">IMPLEMENTATION_STATUS</option>
+                <option value="INDICATOR">INDICATOR</option>
+                <option value="OUTCOME_DATA">OUTCOME_DATA</option>
+                <option value="PROMISE_INDICATOR">PROMISE_INDICATOR</option>
+                <option value="ELECTION">ELECTION</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn btn-primary" id="normAnalyze">🔍 Analyze Dependencies</button>
+            <button class="btn btn-outline" id="normDenormalized">📋 Show Denormalized Data</button>
+            <button class="btn btn-outline" id="normRedundancy">📊 Compare Redundancy</button>
+          </div>
+        </div>
+        <div id="normResults"></div>
+        <div id="normExplanation"></div>
+      </section>
+
+      <!-- ═══════════ Chapter 11: Concurrency ═══════════ -->
+      <section class="chapter" id="chapter-concurrency">
+        <p class="chapter-description">Concurrency control manages simultaneous database access. Transactions ensure ACID properties, isolation levels control what concurrent sessions can see, and locks prevent conflicting modifications.</p>
+        <div class="card">
+          <div class="card-title"><span class="icon">💳</span> Transaction Demo</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Promise ID</label>
+              <input type="number" class="form-input" id="ccPromiseId" value="1" min="1" max="5">
+            </div>
+            <div class="form-group">
+              <label>New Budget</label>
+              <input type="number" class="form-input" id="ccBudget" value="55000000">
+            </div>
+            <div class="form-group">
+              <label>New Progress %</label>
+              <input type="number" class="form-input" id="ccProgress" value="70" min="0" max="100">
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn btn-primary" id="ccTransaction">▶ Execute Transaction</button>
+            <button class="btn btn-success" id="ccSavepoint">📌 Savepoint Demo</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title"><span class="icon">🔒</span> Isolation Levels</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Isolation Level</label>
+              <select class="form-input" id="ccIsolationLevel">
+                <option value="READ UNCOMMITTED">READ UNCOMMITTED</option>
+                <option value="READ COMMITTED">READ COMMITTED</option>
+                <option value="REPEATABLE READ" selected>REPEATABLE READ (MySQL Default)</option>
+                <option value="SERIALIZABLE">SERIALIZABLE</option>
+              </select>
+            </div>
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+            <button class="btn btn-primary" id="ccIsolation">🔒 Test Isolation Level</button>
+            <button class="btn btn-outline" id="ccLocks">🔍 Show Active Locks</button>
+          </div>
+        </div>
+        <div id="ccSQL"></div>
+        <div id="ccResults"><div class="empty-state"><div class="icon">👆</div>Click a button to demo concurrency concepts</div></div>
+        <div id="ccExplanation"></div>
+      </section>
+
+    </div><!-- end content-body -->
   </main>
+</div>
 
-  <!-- ═══════════════ Footer ═══════════════ -->
-  <footer class="footer">
-    <div class="container">
-      <p class="footer__text">
-        Election Promises Tracker — DBMS Project &copy; 2024 &nbsp;·&nbsp; 
-        Built with MySQL, HTML, CSS &amp; JavaScript
-      </p>
-    </div>
-  </footer>
+<!-- ═══════════ Footer ═══════════ -->
+<footer style="margin-left:260px;text-align:center;padding:16px;font-size:0.75rem;color:#9e9e9e;border-top:1px solid #e0e0e0;background:#fff">
+  Election Promises Tracker — DBMS Educational Dashboard &copy; 2024 &nbsp;·&nbsp; Built with Node.js, Express, MySQL, Chart.js
+</footer>
 
-  <script src="script.js"></script>
+<!-- Scripts -->
+<script src="js/api.js"></script>
+<script src="js/visualizations.js"></script>
+<script src="js/main.js"></script>
+<script src="js/chapters/aggregate.js"></script>
+<script src="js/chapters/subqueries.js"></script>
+<script src="js/chapters/joins.js"></script>
+<script src="js/chapters/set_operations.js"></script>
+<script src="js/chapters/views.js"></script>
+<script src="js/chapters/functions.js"></script>
+<script src="js/chapters/procedures.js"></script>
+<script src="js/chapters/triggers.js"></script>
+<script src="js/chapters/cursors.js"></script>
+<script src="js/chapters/normalization.js"></script>
+<script src="js/chapters/concurrency.js"></script>
 </body>
 </html>
