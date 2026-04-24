@@ -16,6 +16,14 @@ When politicians run for office, they make a lot of promises (like "better schoo
 - **The "Brain" Lab:** If you want to see how the database works, there's a special lab where you can run commands like "Show me all promises from 2024" or "Which promises are late?".
 - **ER Diagram:** A map that shows how all the information is linked together.
 
+<img width="1916" height="933" alt="image" src="https://github.com/user-attachments/assets/c674c901-960c-42c0-af9f-023a14d38efb" />
+<img width="1851" height="818" alt="image" src="https://github.com/user-attachments/assets/f76411f0-2285-4d2b-9f8b-6311690ba82e" />
+<img width="1843" height="743" alt="image" src="https://github.com/user-attachments/assets/42fe7c00-c68c-461c-af05-f2c6ded89c55" />
+<img width="1847" height="826" alt="image" src="https://github.com/user-attachments/assets/6ff2b027-d3a0-45de-a7b2-e365456dd4f1" />
+<img width="1857" height="656" alt="image" src="https://github.com/user-attachments/assets/d9f06243-6130-4183-a622-913315f3f82d" />
+<img width="1861" height="853" alt="image" src="https://github.com/user-attachments/assets/6f4fee8e-4bd9-4548-b973-f9aac106ad5f" />
+
+
 ## 🚀 How to get it running?
 
 You don't need to be a pro to run this. Just follow these 3 steps:
