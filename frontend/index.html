@@ -3,15 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Interactive DBMS Educational Dashboard — Election Promises vs Actual Implementation. Learn SQL concepts through real queries.">
-  <title>Election Promises Tracker — DBMS Educational Dashboard</title>
+  <meta name="description" content="Track and analyze government election promises against their actual implementation status with measurable outcomes. A DBMS project dashboard.">
+  <title>Election Promises Tracker — Dashboard</title>
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 </head>
 <body>
 
-<div class="app-layout">
+  <!-- ═══════════════ Navigation ═══════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#" class="navbar__brand">
+        <div class="navbar__logo">EP</div>
+        <div>
+          <div class="navbar__title">Election Promises Tracker</div>
+          <div class="navbar__subtitle">DBMS Project Dashboard</div>
+        </div>
+      </a>
+      <ul class="navbar__links">
+        <li><a href="#overview" class="navbar__link active">Overview</a></li>
+        <li><a href="#promises" class="navbar__link">Promises</a></li>
+        <li><a href="#database" class="navbar__link">Database</a></li>
+        <li><a href="#governments" class="navbar__link">Governments</a></li>
+        <li><a href="#analytics" class="navbar__link">Analytics</a></li>
+        <li><a href="#outcomes" class="navbar__link">Outcomes</a></li>
+        <li><a href="#schema" class="navbar__link">Schema</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══════════════ Hero Section ═══════════════ -->
+  <header class="hero" id="overview">
+    <div class="container">
+      <div class="hero__badge">
+        <span class="hero__badge-dot"></span>
+        DBMS Course Project
+      </div>
+      <h1 class="hero__title">Election Promises<br>vs Actual Implementation</h1>
+      <p class="hero__description">
+        A comprehensive database system to track, analyze, and visualize government election promises 
+        against their real-world implementation — powered by measurable policy indicators.
+      </p>
+    </div>
+  </header>
+
+  <main>
+    <!-- ═══════════════ KPI Cards ═══════════════ -->
+    <section class="section" id="kpiSection">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">
+            <span class="section__title-icon" style="background: rgba(99,102,241,0.12);">📊</span>
+            Key Metrics
+          </h2>
+        </div>
+        <div class="kpi-grid" id="kpiGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ Promise Table ═══════════════ -->
+    <section class="section" id="promises">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">
+            <span class="section__title-icon" style="background: rgba(16,185,129,0.12);">📋</span>
+            All Promises
+          </h2>
+        </div>
+        <div class="table-wrapper">
+          <div class="table-toolbar">
+            <div class="table-toolbar__search">
+              <span>🔍</span>
+              <input type="text" id="tableSearch" placeholder="Search promises..." aria-label="Search promises">
+            </div>
+            <div class="table-toolbar__filters">
+              <button class="filter-btn active" data-filter="All" id="filterAll">All</button>
+              <button class="filter-btn" data-filter="Completed" id="filterCompleted">Completed</button>
+              <button class="filter-btn" data-filter="In Progress" id="filterInProgress">In Progress</button>
+              <button class="filter-btn" data-filter="Not Started" id="filterNotStarted">Not Started</button>
+              <button class="filter-btn" data-filter="Delayed" id="filterDelayed">Delayed</button>
+            </div>
+          </div>
+          <div style="overflow-x: auto;">
+            <table class="data-table" id="promiseTable">
+              <thead>
+                <tr>
+                  <th>Promise <span class="sort-icon">↕</span></th>
+                  <th>Government <span class="sort-icon">↕</span></th>
+                  <th>Policy Area <span class="sort-icon">↕</span></th>
+                  <th>Status <span class="sort-icon">↕</span></th>
+                  <th>Progress <span class="sort-icon">↕</span></th>
+                  <th>Budget <span class="sort-icon">↕</span></th>
+                  <th>Priority <span class="sort-icon">↕</span></th>
+                </tr>
+              </thead>
+              <tbody id="promiseTableBody">
+                <!-- Rendered by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ Government Scorecards ═══════════════ -->
+    <section class="section" id="governments">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">
+            <span class="section__title-icon" style="background: rgba(139,92,246,0.12);">🏛️</span>
+            Government Performance
+          </h2>
+        </div>
+        <div class="scorecard-grid" id="scorecardGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ Analytics Charts ═══════════════ -->
+    <section class="section" id="analytics">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">
+            <span class="section__title-icon" style="background: rgba(245,158,11,0.12);">📈</span>
+            Analytics
+          </h2>
+        </div>
+        <div class="charts-grid">
+          <!-- Budget Allocation Chart -->
+          <div class="chart-card">
+            <div class="chart-card__title">💰 Budget Allocation by Promise</div>
+            <div class="bar-chart" id="budgetChart">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+          <!-- Status Distribution Donut -->
+          <div class="chart-card">
+            <div class="chart-card__title">📊 Status Distribution</div>
+            <div class="donut-chart-container" id="statusDonut">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ Promise vs Outcome ═══════════════ -->
+    <section class="section" id="outcomes">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">
+            <span class="section__title-icon" style="background: rgba(6,182,212,0.12);">🎯</span>
+            Promise vs Outcome Analysis
+          </h2>
+        </div>
+        <div class="outcome-grid" id="outcomeGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ ER Diagram ═══════════════ -->
+    <section class="section" id="schema">
+      <div class="container">
+        <div class="section__header">
+          <h2 class="section__title">
+            <span class="section__title-icon" style="background: rgba(244,63,94,0.12);">🗄️</span>
+            Database Schema (ER Diagram)
+          </h2>
+        </div>
+        <div class="er-card">
+          <div style="text-align: center; margin-bottom: var(--space-lg);">
+            <span style="font-size: 0.82rem; color: var(--text-muted);">
+              🔑 <span style="color: var(--accent-amber);">Primary Key</span> &nbsp;·&nbsp; 
+              🔗 <span style="color: var(--accent-cyan);">Foreign Key</span> &nbsp;·&nbsp; 
+              • <span style="color: var(--text-secondary);">Attribute</span>
+            </span>
+          </div>
+          <div class="er-diagram" id="erDiagram">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════ Database Tab ═══════════════ -->
+    <section class="section" id="database" style="display:none;">
+      <div class="app-layout">
   <!-- ═══════════ Sidebar ═══════════ -->
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-brand">
@@ -330,13 +512,21 @@
     </div><!-- end content-body -->
   </main>
 </div>
+    </section>
 
-<!-- ═══════════ Footer ═══════════ -->
-<footer style="margin-left:260px;text-align:center;padding:16px;font-size:0.75rem;color:#9e9e9e;border-top:1px solid #e0e0e0;background:#fff">
-  Election Promises Tracker — DBMS Educational Dashboard &copy; 2024 &nbsp;·&nbsp; Built with Node.js, Express, MySQL, Chart.js
-</footer>
+  </main>
 
-<!-- Scripts -->
+  <!-- ═══════════════ Footer ═══════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <p class="footer__text">
+        Election Promises Tracker — DBMS Project &copy; 2024 &nbsp;·&nbsp; 
+        Built with MySQL, HTML, CSS &amp; JavaScript
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/dashboard.js"></script>
 <script src="js/api.js"></script>
 <script src="js/visualizations.js"></script>
 <script src="js/main.js"></script>
