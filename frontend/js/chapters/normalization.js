@@ -17,7 +17,7 @@ function renderNormalizationSteps() {
     <!-- Step 0: Denormalized -->
     <div class="norm-step">
       <h3>⚠️ Before: Denormalized Table (Problems)</h3>
-      <p style="margin-bottom:12px;font-size:0.85rem;color:#757575">If we stored everything in ONE table, we'd have these problems:</p>
+      <p style="margin-bottom:12px;font-size:0.85rem;color:var(--text-muted)">If we stored everything in ONE table, we'd have these problems:</p>
       <div class="table-wrapper">
         <table class="data-table">
           <thead><tr>
@@ -35,7 +35,7 @@ function renderNormalizationSteps() {
           </tbody>
         </table>
       </div>
-      <div class="explanation-box" style="margin-top:16px;border-left-color:var(--red)">
+      <div class="explanation-box" style="margin-top:16px;border-left-color:var(--accent-rose)">
         <h4>⚠️ Anomalies in Denormalized Design</h4>
         <ul>
           <li><strong>Update Anomaly:</strong> Changing "Rajesh Kumar" requires updating rows 1, 2, and 4. Missing one creates inconsistency.</li>
@@ -71,7 +71,7 @@ function renderNormalizationSteps() {
           <li>⚠️ No <strong>partial dependencies</strong> — every non-key attribute must depend on the <strong>entire</strong> primary key</li>
         </ul>
       </div>
-      <h4 style="margin:16px 0 8px;color:var(--navy)">Dependency Analysis:</h4>
+      <h4 style="margin:16px 0 8px;color:var(--accent-green)">Dependency Analysis:</h4>
       <div class="dependency-arrow good">✅ Promise_ID → Title (full dependency on PK)</div>
       <div class="dependency-arrow good">✅ Promise_ID → Budget (full dependency on PK)</div>
       <div class="dependency-arrow good">✅ Promise_ID → Description (full dependency on PK)</div>
@@ -91,7 +91,7 @@ function renderNormalizationSteps() {
           <li>✅ No <strong>transitive dependencies</strong> — non-key attributes depend ONLY on the primary key</li>
         </ul>
       </div>
-      <h4 style="margin:16px 0 8px;color:var(--navy)">Solution: Separate Tables (our actual schema)</h4>
+      <h4 style="margin:16px 0 8px;color:var(--accent-green)">Solution: Separate Tables (our actual schema)</h4>
       <div class="tables-side-by-side">
         <div>
           <div class="table-card-label">🔑 GOVERNMENT Table</div>
@@ -131,7 +131,7 @@ function renderNormalizationSteps() {
           </div>
         </div>
       </div>
-      <div class="explanation-box" style="border-left-color:var(--green)">
+      <div class="explanation-box" style="border-left-color:var(--accent-green)">
         <h4>✅ Benefits of 3NF Design</h4>
         <ul>
           <li>✅ <strong>No update anomalies:</strong> Change CM name once in GOVERNMENT table</li>
@@ -162,8 +162,8 @@ async function showRedundancy() {
   showLoading('normResults');
   const data = await apiGet('/normalization/redundancy-check');
   if (data.success) {
-    let html = '<h4 style="margin:0 0 8px;color:#1a237e">Normalized (stored once)</h4><div id="normNorm"></div>';
-    html += '<h4 style="margin:16px 0 8px;color:#1a237e">Denormalized (redundant copies)</h4><div id="normDenorm"></div>';
+    let html = '<h4 style="margin:0 0 8px;color:var(--accent-green)">Normalized (stored once)</h4><div id="normNorm"></div>';
+    html += '<h4 style="margin:16px 0 8px;color:var(--accent-green)">Denormalized (redundant copies)</h4><div id="normDenorm"></div>';
     document.getElementById('normResults').innerHTML = html;
     renderTable('normNorm', data.results.normalized);
     renderTable('normDenorm', data.results.denormalized);
@@ -180,8 +180,8 @@ async function analyzeTable() {
   showLoading('normResults');
   const data = await apiGet(`/normalization/dependencies/${tableName}`);
   if (data.success) {
-    let html = `<h4 style="margin:0 0 8px;color:#1a237e">Columns of ${tableName}</h4><div id="normCols"></div>`;
-    html += `<h4 style="margin:16px 0 8px;color:#1a237e">Foreign Key Relationships</h4><div id="normFKs"></div>`;
+    let html = `<h4 style="margin:0 0 8px;color:var(--accent-green)">Columns of ${tableName}</h4><div id="normCols"></div>`;
+    html += `<h4 style="margin:16px 0 8px;color:var(--accent-green)">Foreign Key Relationships</h4><div id="normFKs"></div>`;
     document.getElementById('normResults').innerHTML = html;
     renderTable('normCols', data.results.columns);
     if (data.results.foreignKeys.length > 0) {

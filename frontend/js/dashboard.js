@@ -86,28 +86,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
       document.getElementById('kpiGrid').innerHTML = `
         <div class="kpi-card animate-in">
-          <div class="kpi-card__icon" style="background: rgba(99,102,241,0.2); color: var(--accent-indigo);">🎯</div>
+          <div class="kpi-card__icon" style="background: rgba(118, 185, 0, 0.2); color: var(--accent-green);">🎯</div>
           <div class="kpi-card__info">
             <div class="kpi-card__value">${totalPromises}</div>
             <div class="kpi-card__label">Total Promises</div>
           </div>
         </div>
         <div class="kpi-card animate-in">
-          <div class="kpi-card__icon" style="background: rgba(16,185,129,0.2); color: var(--accent-emerald);">✅</div>
+          <div class="kpi-card__icon" style="background: rgba(118, 185, 0, 0.2); color: var(--accent-green);">✅</div>
           <div class="kpi-card__info">
             <div class="kpi-card__value">${completionRate}%</div>
             <div class="kpi-card__label">Completion Rate</div>
           </div>
         </div>
         <div class="kpi-card animate-in">
-          <div class="kpi-card__icon" style="background: rgba(245,158,11,0.2); color: var(--accent-amber);">💰</div>
+          <div class="kpi-card__icon" style="background: rgba(118, 185, 0, 0.2); color: var(--accent-green);">💰</div>
           <div class="kpi-card__info">
             <div class="kpi-card__value">${formatCurrency(totalBudget)}</div>
             <div class="kpi-card__label">Total Budget</div>
           </div>
         </div>
         <div class="kpi-card animate-in">
-          <div class="kpi-card__icon" style="background: rgba(59,130,246,0.2); color: var(--accent-blue);">⏳</div>
+          <div class="kpi-card__icon" style="background: rgba(118, 185, 0, 0.2); color: var(--accent-green);">⏳</div>
           <div class="kpi-card__info">
             <div class="kpi-card__value">${inProgressPromises}</div>
             <div class="kpi-card__label">In Progress</div>
@@ -146,12 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <td>
               <div style="display:flex;align-items:center;gap:8px">
                 <div style="flex:1;background:var(--bg-glass-border);height:6px;border-radius:3px;overflow:hidden">
-                  <div style="height:100%;width:${row.Progress_Percentage}%;background:${row.Progress_Percentage >= 100 ? 'var(--accent-emerald)' : 'var(--accent-blue)'}"></div>
+                  <div style="height:100%;width:${row.Progress_Percentage}%;background:var(--accent-green)"></div>
                 </div>
                 <span style="font-size:0.75rem;font-weight:600">${parseFloat(row.Progress_Percentage).toFixed(0)}%</span>
               </div>
             </td>
-            <td style="font-weight:600;color:var(--accent-emerald)">${formatCurrency(row.Budget_Allocated)}</td>
+            <td style="font-weight:600;color:var(--accent-green)">${formatCurrency(row.Budget_Allocated)}</td>
             <td><span style="font-size:0.8rem;color:var(--text-secondary)">High</span></td>
           </tr>
         `;
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   <span style="color:var(--text-primary);font-weight:700">${parseFloat(row.Completion_Rate).toFixed(1)}%</span>
                 </div>
                 <div class="scorecard__progress-bar">
-                  <div class="scorecard__progress-fill" style="width: ${row.Completion_Rate}%; background: var(--gradient-emerald)"></div>
+                  <div class="scorecard__progress-fill" style="width: ${row.Completion_Rate}%; background: var(--gradient-primary)"></div>
                 </div>
               </div>
             </div>
@@ -283,8 +283,8 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
               label: 'Budget Allocated (INR)',
               data: data,
-              backgroundColor: 'rgba(59, 130, 246, 0.7)',
-              borderColor: 'rgba(59, 130, 246, 1)',
+              backgroundColor: 'rgba(118, 185, 0, 0.7)',
+              borderColor: 'rgba(118, 185, 0, 1)',
               borderWidth: 1,
               borderRadius: 4
             }]
@@ -323,11 +323,11 @@ document.addEventListener('DOMContentLoaded', () => {
             datasets: [{
               data: data,
               backgroundColor: [
-                '#10b981', // Completed (Emerald)
-                '#3b82f6', // In Progress (Blue)
-                '#64748b', // Not Started (Slate)
-                '#f43f5e', // Delayed (Rose)
-                '#f59e0b'  // Abandoned (Amber)
+                '#76b900', // Completed (NVIDIA Green)
+                '#5c9000', // In Progress (Dark Green)
+                '#94a3b8', // Not Started (Gray)
+                '#334155', // Delayed (Dark Gray)
+                '#050505'  // Abandoned (Black)
               ],
               borderColor: '#111827',
               borderWidth: 2
@@ -360,9 +360,9 @@ document.addEventListener('DOMContentLoaded', () => {
         rows.forEach(row => {
           let achievementColor = 'var(--text-secondary)';
           const achievement = parseFloat(row.Target_Achievement_Percentage);
-          if (achievement >= 90) achievementColor = 'var(--accent-emerald)';
-          else if (achievement >= 50) achievementColor = 'var(--accent-blue)';
-          else if (achievement < 50) achievementColor = 'var(--accent-amber)';
+          if (achievement >= 90) achievementColor = 'var(--accent-green)';
+          else if (achievement >= 50) achievementColor = 'var(--accent-green-light)';
+          else if (achievement < 50) achievementColor = 'var(--text-muted)';
 
           html += `
             <div class="outcome-card animate-in">

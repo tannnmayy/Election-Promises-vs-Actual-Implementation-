@@ -3,18 +3,18 @@
 // ============================================================
 
 const CHART_COLORS = {
-  blue: '#2196f3',
-  green: '#4caf50',
-  red: '#f44336',
-  orange: '#ff9800',
-  purple: '#7c4dff',
-  cyan: '#00bcd4',
-  navy: '#1a237e',
-  pink: '#e91e63',
-  teal: '#009688',
-  amber: '#ffc107',
-  indigo: '#3f51b5',
-  lime: '#cddc39'
+  green: '#76b900',
+  lime: '#84cc16',
+  emerald: '#10b981',
+  darkGreen: '#5c9000',
+  white: '#f1f5f9',
+  gray: '#94a3b8',
+  darkGray: '#334155',
+  slate: '#1e293b',
+  silver: '#cbd5e1',
+  black: '#0f172a',
+  teal: '#0d9488',
+  cyan: '#0891b2'
 };
 
 const PALETTE = Object.values(CHART_COLORS);
@@ -72,11 +72,11 @@ function createBarChart(canvasId, labels, datasets, title = '') {
       ...CHART_DEFAULTS,
       plugins: {
         ...CHART_DEFAULTS.plugins,
-        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#1a237e' }
+        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#f1f5f9' }
       },
       scales: {
-        y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } },
-        x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8', font: { size: 11 } } },
+        x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 11 } } }
       }
     }
   });
@@ -104,7 +104,7 @@ function createPieChart(canvasId, labels, data, title = '') {
       cutout: '55%',
       plugins: {
         ...CHART_DEFAULTS.plugins,
-        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#1a237e' }
+        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#f1f5f9' }
       }
     }
   });
@@ -137,11 +137,11 @@ function createLineChart(canvasId, labels, datasets, title = '') {
       ...CHART_DEFAULTS,
       plugins: {
         ...CHART_DEFAULTS.plugins,
-        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#1a237e' }
+        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#f1f5f9' }
       },
       scales: {
-        y: { beginAtZero: true, grid: { color: '#f0f0f0' }, ticks: { font: { size: 11 } } },
-        x: { grid: { display: false }, ticks: { font: { size: 11 } } }
+        y: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8', font: { size: 11 } } },
+        x: { grid: { display: false }, ticks: { color: '#94a3b8', font: { size: 11 } } }
       }
     }
   });
@@ -169,11 +169,11 @@ function createHorizontalBarChart(canvasId, labels, data, title = '') {
       plugins: {
         ...CHART_DEFAULTS.plugins,
         legend: { display: false },
-        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#1a237e' }
+        title: { display: !!title, text: title, font: { family: "'Inter'", size: 14, weight: '600' }, color: '#f1f5f9' }
       },
       scales: {
-        x: { beginAtZero: true, grid: { color: '#f0f0f0' } },
-        y: { grid: { display: false } }
+        x: { beginAtZero: true, grid: { color: 'rgba(255, 255, 255, 0.05)' }, ticks: { color: '#94a3b8' } },
+        y: { grid: { display: false }, ticks: { color: '#94a3b8' } }
       }
     }
   });
