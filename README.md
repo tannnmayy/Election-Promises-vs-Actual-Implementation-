@@ -1,4 +1,4 @@
-# Election Promises vs Actual Implementation — DBMS Educational Dashboard
+# 🗳️ Election Promises Dashboard
 
 Hi! This project is a simple web dashboard that helps you see if politicians actually kept the promises they made during elections. It's built to show how databases work in a fun and visual way.
 
